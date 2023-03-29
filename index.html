@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressões</title>
+</head>
+<style>
+.erro
+{
+    border-color: lightcoral;
+    outline: lightcoral;
+}
+.certo
+{
+    border-color: lightgreen;
+    outline: lightgreen;
+}
+</style>
+<body>
+    digite seu CPF(somente números)
+    <br>
+<input maxlength="14" type="texto" id="CPF" onkeyup="VerificarCPF()">
+<br><br>
+
+
+digite seu telefone
+<br>
+<input maxlength="16" type="texto" id="telefone"  onkeyup="VerificarTelefone()">
+</body>
+<script>
+    function VerificarCPF()
+    {
+        texto = CPF.value;
+        if(texto.length==3)
+        {
+            CPF.value = texto + "."
+        }
+        if(texto.length==7)
+        {
+            CPF.value = texto + "."
+        }
+        if(texto.length==11)
+        {
+            CPF.value = texto + "-"
+        }
+        //vamos criar uma expressão regular
+        expressao = /[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/g;
+        resposta = expressao.test(texto); //pode ser True  ou False
+
+        if(resposta == true)
+        {
+            CPF.classList.remove('erro');
+            CPF.classList.add('certo');
+        }
+        if(resposta == false) 
+        {
+            CPF.classList.remove('certo');
+            CPF.classList.add('erro');
+        }
+    }
+
+    function VerificarTelefone()
+    {
+        texto = telefone.value;
+        if( telefone.length==3))
+        {
+           telefone.value = texto + ") "
+
+        }
+        expressao = /[/\([0-9]{2}\) 9 [0-9]{4}-[0-9]{4}/g;
+        resposta = expressao.test(texto)    
+        if(resposta == true)
+        {
+           telefone.classList.remove('erro');
+            telefone.classList.add('certo');
+        }
+        if(resposta == false) 
+        {
+            telefone.classList.remove('certo');
+            telefone.classList.add('erro');
+        }
+    }
+</script>
+</html>
